@@ -18,10 +18,10 @@ export default {
   data() {
     return {
       users: [
-                {id:'1', name:'Sara', pass:'1234'},
+                {id:'1', name:'Ida', pass:'1234'},
                 {id:'2', name:'Mina', pass:'1234'},
                 {id:'3', name:'Tina', pass:'1234'},
-                {id:'4', name:'Ida', pass:'1234'}
+                {id:'4', name:'Sara', pass:'1234'}
             ]
     }
   }
