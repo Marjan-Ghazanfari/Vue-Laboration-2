@@ -1,63 +1,49 @@
 <template>
-    <div>
-        <nav class="navbar navbar-light bg-secondary shadow mb-5">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <img src="../assets/images/logo.png" class="logotype">
-                </a>
-                <form class="d-flex" v-if="signedIn" @submit.prevent="logOut">
-                    <p class="mx-3 mt-2 userName">Welcome {{ users[users.length-1].name }}!</p>
-                    <button class="btn btn-success" type="submit">Log out</button>
-                </form>
-                <form class="d-flex" v-else @submit.prevent="logIn">
-                    <button class="btn btn-success" type="submit">Please Log in</button>
-                </form>
-            </div>
-        </nav>
-        <div class="container" v-if="plsLogIn">
-            <Signin class="bg-secondary" :signedIn="checkSignIn" :plsLogIn="plsLogIn" :users="users" />
-        </div>
-    </div>
+  <div>
+    <nav class="navbar navbar-light bg-secondary shadow mb-5">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="../assets/images/logo.png" class="logotype" />
+        </a>
+        <form class="d-flex" v-if="signedIn" @submit.prevent="logOut">
+          <p class="mx-3 mt-2 userName">Welcome {{ signedIn.name }}!</p>
+          <button class="btn btn-success" type="submit">Log out</button>
+        </form>
+        <form class="d-flex" v-else @submit.prevent="logIn">
+          <button class="btn btn-success" type="submit">Please Log in</button>
+        </form>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <script>
-import Signin from './Signin'
 
 export default {
-    props: ['users'],
-    components: {
-        Signin
+  props: ['signedIn'],
+  computed: {
+    checkSignIn() {
+      return this.signedIn;
     },
-    data() {
-        return {
-            plsLogIn: false,
-            signedIn: true
-        }
+  },
+  methods: {
+    logIn() {
+      this.$emit("pls-login");
     },
-    computed: {
-        checkSignIn() {
-            return this.signedIn
-        }
+    logOut() {
+      this.$emit("log-out");
     },
-    methods: {
-        logIn() {
-            this.plsLogIn = true
-        },
-        logOut() {
-            this.signedIn = false
-        }
-    }
-}
+  },
+};
 </script>
 
 <style scoped>
 .logotype {
-    height: 50px;
-    width: auto;
+  height: 50px;
+  width: auto;
 }
 .userName {
-    font-weight: bold;
-    font:italic;
-    /* font-size: 2rem; */
+  font-weight: bold;
+  font: italic;
 }
 </style>
